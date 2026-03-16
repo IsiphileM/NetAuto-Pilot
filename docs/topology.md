@@ -1,10 +1,20 @@
-# NetAuto-Pilot Network Topology
+## 🛰 Network Topology
 
-[ Management PC ] (Running PowerShell)
-       |
-       |----(REST API)----> [ FortiGate 60F ] (Security Gateway)
-       |
-       |----(REST API/SSH)--> [ Aruba 2930F ] (Access Switch)
+```mermaid
+flowchart TB
+
+%% Nodes
+MGMT["🖥 Management PC<br/>PowerShell Automation Engine"]
+FW["🔥 FortiGate 60F<br/>Security Gateway"]
+SW["🔀 Aruba 2930F<br/>Access Switch"]
+
+%% Primary Control Path
+MGMT -- "REST API / HTTPS" --> FW
+FW -- "Trunk / VLAN Trust" --> SW
+
+%% Audit / Telemetry Path
+MGMT -. "SSH / Telemetry" .-> SW
+```
 
 ## Logic Flow
 1. Script loads credentials from config.json.
