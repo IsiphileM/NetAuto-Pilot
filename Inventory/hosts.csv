@@ -1,0 +1,3 @@
+IP,Vendor,Role
+192.168.1.99,Fortinet,Edge-Firewall
+192.168.1.100,Aruba,Access-Switch
