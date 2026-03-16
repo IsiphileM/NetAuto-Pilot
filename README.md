@@ -1,41 +1,92 @@
-🏗️ Architecture & Design
-NetAuto-Pilot is an enterprise-grade automation framework designed to synchronize security posture across multi-vendor network environments. The system focuses on the critical integration between Fortinet Edge Firewalls and Aruba Access Switching, ensuring that security policies are consistent from the perimeter to the access layer.
+# 🤖 NetAuto-Pilot: Multi-Vendor Security Sync Engine
 
-This project utilizes a Modular Abstraction Layer to decouple vendor-specific logic from the core orchestration engine, following industry best practices for scalable infrastructure code.
+## Project Specifications
 
-📁 Project Structure
-The repository is organized into specialized directories to maintain a clean separation of concerns:
+| Attribute | Value |
+|---|---|
+| **System Language** | PowerShell 7.x |
+| **Core Engine** | Modular Abstraction Layer (MAL) |
+| **Primary Focus** | Multi-Vendor Security Orchestration |
+| **Operational Status** | Active / Enterprise Framework |
+| **Network Layer** | Layer 2 (Access) & Layer 4 (Perimeter) |
 
-Core/: Contains the main orchestrator (PulseCheck.ps1) which manages the execution flow.
+---
 
-Modules/: Stores vendor-specific toolkits (FortiDrive.psm1 and ArubaDrive.psm1) for specialized device interaction.
+## Overview
 
-Inventory/: Houses the hosts.csv file, serving as the "Source of Truth" for network assets.
+**NetAuto-Pilot** is an enterprise-grade automation framework designed for **Network Engineers and Security Administrators**.
 
-Policies/: Contains configuration baselines and logic definitions.
+It bridges the configuration gap between **Fortinet Edge Firewalls** and **Aruba Access Switches**.
 
-Logs/: Automatically stores time-stamped audit trails for compliance and troubleshooting.
+By automating the **Security Handshake** between these two vendors, the system ensures that **perimeter security policies are consistently enforced all the way down to the physical switch port**.
 
-🛠️ Technical Implementation
-Language: PowerShell
+---
 
-Design Pattern: Modular Function Abstraction
+## Technical Methodology (The Theory)
 
-Automation Strategy: Multi-vendor conditional branching and state verification.
+The engine operates using a **Modular Abstraction strategy**.
 
-Data Handling: CSV-to-Object transformation using PSCustomObjects.
+Rather than relying on a single rigid script, **NetAuto-Pilot separates vendor-specific commands into modular drivers**, enabling a scalable and vendor-agnostic orchestration flow.
 
-Audit Logging: Persistent filesystem stream auditing with unique timestamps.
+### Logic Flow
 
-🚀 Execution Instructions
-To execute the security sync engine, follow these sequential landmarks:
+#### 1. Inventory Ingestion
+The engine parses a central `hosts.csv` file to identify:
+- Device role
+- Vendor
+- Target nodes
 
-Open your terminal and navigate to the project root.
+#### 2. Contextual Logic
 
-Move into the core directory:
+**Fortinet Module**
+- Interrogates the firewall policy table  
+- Verifies security posture and threat levels
+
+**Aruba Module**
+- Performs a switch port state check  
+- Identifies **Shadow Ports** (active unauthorized ports)
+
+#### 3. Audit Persistence
+Every action is piped through a **custom logging subsystem**, generating a **timestamped append-only audit trail** for compliance and SOC review.
+
+---
+
+## Features
+
+- **Multi-Vendor Drivers**  
+  Specialized `.psm1` modules for **FortiOS** and **ArubaOS-CX**
+
+- **Inventory Orchestration**  
+  CSV-driven management capable of auditing **100+ nodes in a single execution**
+
+- **Automated Audit Trails**  
+  Generates **millisecond-precise logs** for compliance and forensic review
+
+- **Object-Oriented Design**  
+  Uses `PSCustomObject` structures to maintain **data integrity during vendor transitions**
+
+---
+
+## Demonstration
+
+> NetAuto-Pilot performing a synchronized audit across Fortinet and Aruba nodes while generating a localized compliance report.
+
+---
+
+## Installation & Usage
+
+> **Note:** PowerShell execution policy must allow script execution.
+
+```powershell
+# Set execution policy if required
+Set-ExecutionPolicy RemoteSigned
+
+# Clone the repository
+git clone https://github.com/IsiphileM/NetAuto-Pilot.git
+cd NetAuto-Pilot
+
+# Navigate to the Core Engine
 cd Core
 
-Execute the orchestrator:
+# Execute the Orchestrator
 .\PulseCheck.ps1
-
-Verify the results in the terminal and check the Logs/ directory for the generated audit report.
