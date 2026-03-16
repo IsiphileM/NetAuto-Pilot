@@ -54,7 +54,7 @@ This ensures that **policy defined at the firewall level propagates down to the 
 
 The automation engine executes the following operational stages.
 
-## Stage 1 — Inventory Ingestion
+## Stage 1 - Inventory Ingestion
 
 The engine reads the `hosts.csv` inventory file.
 
